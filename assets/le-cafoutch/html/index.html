@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'"> -->
+    <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
+    <title>Accueil - Le-Cafoutch Desktop</title>
+</head>
+<body class="linear-bg-1">
+    <div id="animation" class="animation">
+        <div class="closebutton">
+            <a id="closeAnimationButton">
+                X
+            </a>
+        </div>
+        <div class="animation-content">
+            <div id="success" style="display: none;">
+                <h1>Fichier uploadé !</h1>
+                <p id="link" style="color: rgb(108, 150, 228)"></p>
+                <div class="row">
+                    <div class="col-6">
+                        <input id="copyButton" type="button" value="Copier" class="btn btn-secondary" style="border: none; border-radius: 7.5px; transition: background-color .2s ease-in-out; width: 147.08px; height: 36px;">
+                    </div>
+                    <div class="col-6">
+                        <input id="agrougrouterButton" type="button" value="Agrougrouter" class="btn btn-secondary" style="border: none; border-radius: 7.5px; width: 147.09px; height: 36px;">
+                    </div>
+                </div>
+            </div>
+            <div id="error" style="display: none;">
+                <h1>Erreur !</h1>
+                <p id="errorText"></p>
+            </div>
+        </div>
+    </div>
+    <nav id="nav">
+        <div id="showTitle"></div>
+        <div id="toggler">
+            <div id="close">
+                <div class="closeButton">
+                    <span>&times;</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="mainwindow">
+        <header class="masthead">
+            <div class="intro-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-8 mx-auto">
+                            <h1 style="font-size: 50px;">Le Cafoutch Desktop</h1>
+                            <hr>
+                            <p>
+                                Bienvenue sur Le Cafoutch Desktop.<br>
+                                Pour partager votre fichier, merci de l'uploader ci-dessous.
+                            </p>
+                            <form enctype="multipart/form-data" action="upload.php" method="post">
+                                <div class="row">
+                                    <div class="col d-flex justify-content-center" style="margin-bottom: 10px;">
+                                        <input class="form-control" type="file" name="fileUpload" id="fileUpload" style="width: 50%;" required>
+                                    </div>
+                                </div>
+                                <div id="loadingrow" class="loadingrow">
+                                    <div class="row">
+                                        <div class="col d-flex justify-content-center" style="margin-top: 10px;">
+                                            <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div><p id="uploadPercent" style="margin-top: auto; margin-bottom: auto;">Upload en cours - 0%</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col d-flex justify-content-center">
+                                            <progress id="progressBar" max="100" value="0"></progress>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+    <script src="../../node_js/renderer.js"></script>
+    <script src="../../js/navbar.js"></script>
+    <script src="../js/upload.js"></script>
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

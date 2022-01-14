@@ -76,7 +76,7 @@ async function launchApp() {
 		function createWindow () {
 			// Create the browser window.
 				const mainWindow = new BrowserWindow({
-					  width: 750,
+					  width: 900,
 					  height: 500,
 					  center: true,
 					  movable: true,
@@ -94,7 +94,7 @@ async function launchApp() {
 		  
 				// and load the index.html of the app.
 				mainWindow.loadURL(url.format({
-					  pathname: path.join(__dirname, 'index.html'),
+					  pathname: path.join(__dirname, './assets/agrougrou/html/index.html'),
 					  protocol: 'file:',
 					  slashes: true
 				}));
@@ -120,11 +120,12 @@ async function launchApp() {
 				  const contextMenu = Menu.buildFromTemplate([
 						{label: 'Quitter', role: 'quit'}
 				  ]);
+          tray.setToolTip('AARIX.social Desktop');
 				  tray.setContextMenu(contextMenu);
-				  tray.displayBalloon({
-						title: 'Le-Cafoutch Desktop',
-						content: 'Le-Cafoutch Desktop tourne actuellement en arrière plan.'
-				  });
+				  // tray.displayBalloon({
+						// title: 'AARIX.social Desktop',
+						// content: 'AARIX.social Desktop tourne actuellement en arrière plan.'
+				  // });
 	  
 				  tray.on('click', () => {
 						if(win.isVisible()) {
