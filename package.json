@@ -1,0 +1,19 @@
+{
+  "name": "aarix-social-desktop",
+  "productName": "AARIX.social Desktop",
+  "description": "AARIX.social Desktop est une application créé par AARIX.social permettant d'utiliser les application AARIX.social depuis son pc.",
+  "keywords": [],
+  "main": "./main.js",
+  "version": "1.0.0",
+  "author": "ImAARIX",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^15.3.5"
+  },
+  "dependencies": {
+    "@electron/remote": "^2.0.1",
+    "axios": "^0.24.0"
+  }
+}
