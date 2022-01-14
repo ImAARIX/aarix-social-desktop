@@ -80,3 +80,7 @@ if(__dirname.includes('agrougrou') || __dirname.includes('le-cafoutch')) {
         });
     }
 }
+
+$('img').on('dragstart', function(event) {
+    event.preventDefault();
+});

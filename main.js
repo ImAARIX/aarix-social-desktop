@@ -7,6 +7,7 @@ const path = require('path')
 const url = require('url');
 var tray = null;
 const icon = nativeImage.createFromPath(path.join(__dirname, './assets/img/icons/icon.png'));
+const gotTheLock = app.requestSingleInstanceLock()
 
 
 
@@ -14,6 +15,11 @@ const icon = nativeImage.createFromPath(path.join(__dirname, './assets/img/icons
 
 // START OF UPDATE CODE
 async function searchForUpdate() {
+
+	if(!gotTheLock) {
+		app.quit();
+	}
+
 	try {
 		var versionFile = fs.readFileSync(path.join(__dirname, './assets/json/version.json'));
   		var versionParsed = JSON.parse(versionFile);
@@ -50,7 +56,7 @@ async function searchForUpdate() {
 			}
 			dialog.showMessageBox(null, options).then(() => {
 				app.quit();
-			})
+			});
 			return true;
 		} else {
 			return false;
@@ -86,7 +92,6 @@ function showUpdateDialog(webVersion) {
 async function launchApp() {
 	if(!(await searchForUpdate())) {
 		function createWindow () {
-			// Create the browser window.
 				const mainWindow = new BrowserWindow({
 					  width: 900,
 					  height: 530,
@@ -105,28 +110,17 @@ async function launchApp() {
 					  icon: icon
 				})
 		  
-				// and load the index.html of the app.
 				mainWindow.loadURL(url.format({
 					  pathname: path.join(__dirname, './assets/agrougrou/html/index.html'),
 					  protocol: 'file:',
 					  slashes: true
 				}));
-				// Open the DevTools.
-				// mainWindow.openDevTools();
 				require("@electron/remote/main").enable(mainWindow.webContents);
 				return mainWindow;
 		  }
 	
 		app.whenReady().then(() => {
 			const win = createWindow()
-		  
-		  
-			//DEBUG
-			// win.once('ready-to-show', () => {
-			// 	  win.show();
-			// })
-			//DEBUG
-	  
 	  
 			win.once('ready-to-show', () => {
 				tray = new Tray(icon);
@@ -135,10 +129,10 @@ async function launchApp() {
 				]);
           		tray.setToolTip('AARIX.social Desktop');
 				tray.setContextMenu(contextMenu);
-				// tray.displayBalloon({
-					// title: 'AARIX.social Desktop',
-					// content: 'AARIX.social Desktop tourne actuellement en arrière plan.'
-				// });
+				tray.displayBalloon({
+					title: 'AARIX.social Desktop',
+					content: 'AARIX.social Desktop tourne actuellement en arrière plan.'
+				});
 	  
 				tray.on('click', () => {
 					if(win.isVisible()) {

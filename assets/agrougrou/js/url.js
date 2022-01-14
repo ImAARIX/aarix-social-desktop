@@ -1,4 +1,3 @@
-const $ = require('jquery');
 var url = document.getElementById('url');
 var textToCopy = document.getElementById('link');
 var copyButton = document.getElementById('copyButton');
