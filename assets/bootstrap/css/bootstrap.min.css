@@ -55,8 +55,11 @@ p {
 
 .masthead {
     display:table;
-    width:100%;
-    height:100%;
+    width: 750px;
+    height: 500px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
     /*padding:200px 0;*/
     text-align:center;
     color:#fff;
@@ -77,11 +80,7 @@ p {
 
 }
 
-@media(min-width: 768px){
-    .masthead{
-        height:100%;
-    }
-    
+@media(min-width: 768px){    
     .masthead .intro-body .brand-heading{
         font-size:75px
     }

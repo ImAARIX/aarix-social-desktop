@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@electron/remote": "^2.0.1",
-    "axios": "^0.24.0"
+    "axios": "^0.24.0",
+    "jquery": "^3.6.0"
   }
 }

@@ -1,6 +1,7 @@
 #sidebarNav {
-    height: 100%;
+    height: 500px;
     width: 150px;
+    margin-top: 30px;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -10,11 +11,21 @@
     overflow-x: hidden;
 }
 
+#sidebarNav>#agrougrouPage, #sidebarNav>#leCafoutchPage {
+    width: 100%;
+    height: 50%;
+}
+
+#sideBarNav>#agrougrouPage>#agrougrouPageButton, #sidebarNav>#leCafoutchPage>#leCafoutchPageButton {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
 #nav {
     position: sticky;
     top: 0;
     right: 0;
-    width: 750px;
+    width: 100%;
     float: right;
     height: 30px;
     -webkit-app-region: drag;

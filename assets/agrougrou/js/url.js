@@ -1,21 +1,23 @@
+const $ = require('jquery');
 var url = document.getElementById('url');
 var textToCopy = document.getElementById('link');
 var copyButton = document.getElementById('copyButton');
 var animation = document.getElementById('animation');
 var success = document.getElementById('success');
 var errorDiv = document.getElementById('error');
+var linkValue = "";
 
 var noUrl = 0;
 
-async function agrougrouter() {
+async function agrougrouter(agvalue) {
     noUrl++;
-    let formData = new FormData();
-    if(!url.value == "") {
-        formData.append("url", url.value);
-    }
-
+    console.log(agvalue);
+    var formData = new FormData();
+    // if(!agvalue == "") {
+        formData.append("url", agvalue);
+    // }
     try {
-        let r = await fetch("https://api.aarix.social/v1/agrougrou/url/", {
+        var r = await fetch("https://api.aarix.social/v1/agrougrou/url/", {
             method: "POST", body: formData, mode: "cors" })
         r.json().then((data) => {
             error = data.error;
@@ -102,3 +104,17 @@ function copy() {
         return 0;
     }
 }
+
+function changeLinkValue(val) {
+    console.log(val);
+    linkValue = val;
+}
+
+$('form').keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      document.getElementById('agrougrouterButton').select();
+      agrougrouter(linkValue);
+      return false;
+    }
+  });
