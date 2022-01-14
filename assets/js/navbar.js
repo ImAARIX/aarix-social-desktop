@@ -1,5 +1,7 @@
 const remote = require('@electron/remote');
 const $ = require('jquery');
+const {app} = require('electron');
+
 var win = remote.getCurrentWindow();
 var closeButton = document.getElementById('close');
 var agrougrouPage = document.getElementById('agrougrouPage');
@@ -21,59 +23,60 @@ var agf = document.getElementById('agrougrou-fade');
 var lc = document.getElementById('le-cafoutch');
 var ag = document.getElementById('agrougrou');
 
-if(!ag) {
-    setTimeout(() => {
-        lcf.style.opacity = "0";
-    }, 10);
-
-    lct.addEventListener('mouseover', () => {
-        if(!clicked) {
-            lcf.style.opacity = "1";
-        }
-    })
-    
-    lct.addEventListener('mouseout', () => {
-        if(!clicked) {
+if(__dirname.includes('agrougrou') || __dirname.includes('le-cafoutch')) {
+    if(!ag) {
+        setTimeout(() => {
             lcf.style.opacity = "0";
-        }
-    });
-
-    agrougrouPage.addEventListener('click', () => {
-        var win = remote.getCurrentWindow();
-        clicked = true;
-        agf.style.opacity = "1";
-        appView.style.opacity = 0;
-        setTimeout(() => {
-            win.loadURL('file://' + __dirname + '../../../agrougrou/html/index.html');
-        }, 105);
-    });
-}
-
-if(!lc) {
-    setTimeout(() => {
-        agf.style.opacity = "0";
-    }, 10);
-
-    agt.addEventListener('mouseover', () => {
-        if(!clicked) {
-            agf.style.opacity = "1";
-        }
-    })
+        }, 10);
     
-    agt.addEventListener('mouseout', () => {
-        if(!clicked) {
-            agf.style.opacity = "0";
-        }
-    });
-
-    leCafoutchPage.addEventListener('click', () => {
-        var win = remote.getCurrentWindow();
-        clicked = true;
-        lcf.style.opacity = "1";
-        appView.style.opacity = 0;
+        lct.addEventListener('mouseover', () => {
+            if(!clicked) {
+                lcf.style.opacity = "1";
+            }
+        })
+        
+        lct.addEventListener('mouseout', () => {
+            if(!clicked) {
+                lcf.style.opacity = "0";
+            }
+        });
+    
+        agrougrouPage.addEventListener('click', () => {
+            var win = remote.getCurrentWindow();
+            clicked = true;
+            agf.style.opacity = "1";
+            appView.style.opacity = 0;
+            setTimeout(() => {
+                win.loadURL('file://' + __dirname + '../../../agrougrou/html/index.html');
+            }, 105);
+        });
+    }
+    
+    if(!lc) {
         setTimeout(() => {
-            win.loadURL('file://' + __dirname + '../../../le-cafoutch/html/index.html');
-        }, 105);
-    });
+            agf.style.opacity = "0";
+        }, 10);
+    
+        agt.addEventListener('mouseover', () => {
+            if(!clicked) {
+                agf.style.opacity = "1";
+            }
+        })
+        
+        agt.addEventListener('mouseout', () => {
+            if(!clicked) {
+                agf.style.opacity = "0";
+            }
+        });
+    
+        leCafoutchPage.addEventListener('click', () => {
+            var win = remote.getCurrentWindow();
+            clicked = true;
+            lcf.style.opacity = "1";
+            appView.style.opacity = 0;
+            setTimeout(() => {
+                win.loadURL('file://' + __dirname + '../../../le-cafoutch/html/index.html');
+            }, 105);
+        });
+    }
 }
-
