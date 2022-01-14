@@ -25,14 +25,6 @@ html, body {
     -webkit-user-select: none;
 }
 
-.mainwindow {
-    width: 750px;
-    height: 500px;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-}
-
 .linear-bg-1 {
     background: #aa4b6b;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to left, #3b8d99, #6b6b83, #aa4b6b);  /* Chrome 10-25, Safari 5.1-6 */

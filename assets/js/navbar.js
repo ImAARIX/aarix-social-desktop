@@ -1,6 +1,8 @@
 const remote = require('@electron/remote');
 var win = remote.getCurrentWindow();
 var closeButton = document.getElementById('close');
+var agrougrouPage = document.getElementById('agrougrouPage');
+var leCafoutchPage = document.getElementById('leCafoutchPage');
 
 closeButton.addEventListener('click', () => {
     win.hide();
@@ -25,6 +27,11 @@ if(!ag) {
     lct.addEventListener('mouseout', () => {
         lcf.style.opacity = "0";
     });
+
+    agrougrouPage.addEventListener('click', () => {
+        var win = remote.getCurrentWindow();
+        win.loadURL('file://' + __dirname + '../../../agrougrou/html/index.html');
+    });
 }
 
 if(!lc) {
@@ -35,5 +42,11 @@ if(!lc) {
     
     agt.addEventListener('mouseout', () => {
         agf.style.opacity = "0";
+    });
+
+    leCafoutchPage.addEventListener('click', () => {
+        var win = remote.getCurrentWindow();
+        console.log(__dirname);
+        win.loadURL('file://' + __dirname + '../../../le-cafoutch/html/index.html');
     });
 }
