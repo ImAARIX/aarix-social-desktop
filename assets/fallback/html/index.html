@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  	<meta charset="UTF-8">
+  	<!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+  	<!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'"> -->
+	<link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../css/navbar.css" rel="stylesheet">
+  	<title>Agrougrou - AARIX.social Desktop</title>
+</head>
+<body id="agrougrou">
+    <nav id="nav">
+        <div id="showTitle"></div>
+        <div id="toggler">
+            <div id="close">
+                <div class="closeButton">
+                    <span>&times;</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="masthead" style="bottom: 0; left: 0; right: 0; width: 100%; height: 500px;">
+        <div class="intro-body">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <h1 style="font-size: 50px;">AARIX.social est down !</h1>
+                        <p>
+                            Le serveur AARIX.social est actuellement inaccessible.<br>
+                            Merci de réessayer ultérieurement.
+                        </p>
+                        <p id='retryMessage'>
+                            Nouvel essai dans : 30s
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <script src="../../node_js/renderer.js"></script>
+    <script src="../../js/navbar.js"></script>
+    <script src="../js/up.js"></script>
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

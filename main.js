@@ -15,34 +15,46 @@ const icon = nativeImage.createFromPath(path.join(__dirname, './assets/img/icons
 // START OF UPDATE CODE
 async function searchForUpdate() {
 	try {
-	var versionFile = fs.readFileSync(path.join(__dirname, './assets/json/version.json'));
-  	var versionParsed = JSON.parse(versionFile);
+		var versionFile = fs.readFileSync(path.join(__dirname, './assets/json/version.json'));
+  		var versionParsed = JSON.parse(versionFile);
 
-	var webVersionFile = await axios.get('https://aarix.social/desktop/version.json');
-	var webVersionParsed = webVersionFile.data;
-	console.log('appVersion: ' + versionParsed.version);
-	console.log('webVersion: ' + webVersionParsed.version);
-	if(versionParsed.version < webVersionParsed.version) {
-		console.log('Update found! V' + webVersionParsed.version);
-		showUpdateDialog(webVersionParsed.version);
-		return true;
-	} else {
-		console.log('Up to date');
-		return false;
-	}
+		var webVersionFile = await axios.get('https://aarix.social/desktop/version.json', {
+			validateStatus: function (status) {
+				return true;
+			},
+			timeout: 5000
+		});
+  		if(webVersionFile.data.version !== undefined) {
+    		var webVersionParsed = webVersionFile.data;
+		  	console.log('appVersion: ' + versionParsed.version);
+		  	console.log('webVersion: ' + webVersionParsed.version);
+		  	if(versionParsed.version < webVersionParsed.version) {
+		  		console.log('Update found! V' + webVersionParsed.version);
+		  		showUpdateDialog(webVersionParsed.version);
+		  		return true;
+		  	} else {
+		  		console.log('Up to date');
+		  		return false;
+		  	}
+  		}
 	} catch(e) {
-		const options = {
-			type: 'question',
-			buttons: ['Ok'],
-			defaultId: 0,
-			title: "Vous n'êtes pas connecté à internet.",
-			message: "Vous n'êtes pas connecté à internet.",
-			detail: "Vous ne pouvez donc pas lancer l'application."
+		var err = e.toJSON();
+		if(!(err.code == 'ETIMEDOUT') && !(err.code == 'ECONNABORTED')) {
+			const options = {
+				type: 'question',
+				buttons: ['Ok'],
+				defaultId: 0,
+				title: "Vous n'êtes pas connecté à internet.",
+				message: "Vous n'êtes pas connecté à internet.",
+				detail: "Vous ne pouvez donc pas lancer l'application."
+			}
+			dialog.showMessageBox(null, options).then(() => {
+				app.quit();
+			})
+			return true;
+		} else {
+			return false;
 		}
-		dialog.showMessageBox(null, options).then(() => {
-			app.quit();
-		})
-		return;
 	}
 }
 
@@ -82,6 +94,7 @@ async function launchApp() {
 					  movable: true,
 					  resizable: false,
 					  frame: false,
+					  devTools: false,
 					  webPreferences: {
 							nodeIntegration: true,
 							enableRemoteModule: true,
@@ -116,27 +129,27 @@ async function launchApp() {
 	  
 	  
 			win.once('ready-to-show', () => {
-				  tray = new Tray(icon);
-				  const contextMenu = Menu.buildFromTemplate([
-						{label: 'Quitter', role: 'quit'}
-				  ]);
-          tray.setToolTip('AARIX.social Desktop');
-				  tray.setContextMenu(contextMenu);
-				  // tray.displayBalloon({
-						// title: 'AARIX.social Desktop',
-						// content: 'AARIX.social Desktop tourne actuellement en arrière plan.'
-				  // });
+				tray = new Tray(icon);
+				const contextMenu = Menu.buildFromTemplate([
+					{label: 'Quitter', role: 'quit'}
+				]);
+          		tray.setToolTip('AARIX.social Desktop');
+				tray.setContextMenu(contextMenu);
+				// tray.displayBalloon({
+					// title: 'AARIX.social Desktop',
+					// content: 'AARIX.social Desktop tourne actuellement en arrière plan.'
+				// });
 	  
-				  tray.on('click', () => {
-						if(win.isVisible()) {
-						  win.hide();
-						} else {
-						  win.show();
-						}
-				  })
+				tray.on('click', () => {
+					if(win.isVisible()) {
+						win.hide();
+					} else {
+						win.show();
+					}
+				})
 			})
 			app.on('activate', function () {
-				  if (BrowserWindow.getAllWindows().length === 0) createWindow()
+				if (BrowserWindow.getAllWindows().length === 0) createWindow()
 			})
 	  })
 		  // app.on('window-all-closed', function () {
