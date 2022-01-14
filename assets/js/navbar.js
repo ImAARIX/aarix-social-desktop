@@ -1,12 +1,15 @@
 const remote = require('@electron/remote');
+const $ = require('jquery');
 var win = remote.getCurrentWindow();
 var closeButton = document.getElementById('close');
 var agrougrouPage = document.getElementById('agrougrouPage');
 var leCafoutchPage = document.getElementById('leCafoutchPage');
+var appView = document.getElementById('appView');
+
+var clicked = false;
 
 closeButton.addEventListener('click', () => {
     win.hide();
-    
 });
 
 var lct = document.getElementById('le-cafoutch-text');
@@ -19,34 +22,58 @@ var lc = document.getElementById('le-cafoutch');
 var ag = document.getElementById('agrougrou');
 
 if(!ag) {
+    setTimeout(() => {
+        lcf.style.opacity = "0";
+    }, 10);
+
     lct.addEventListener('mouseover', () => {
-        console.log("hover");
-        lcf.style.opacity = "1";
+        if(!clicked) {
+            lcf.style.opacity = "1";
+        }
     })
     
     lct.addEventListener('mouseout', () => {
-        lcf.style.opacity = "0";
+        if(!clicked) {
+            lcf.style.opacity = "0";
+        }
     });
 
     agrougrouPage.addEventListener('click', () => {
         var win = remote.getCurrentWindow();
-        win.loadURL('file://' + __dirname + '../../../agrougrou/html/index.html');
+        clicked = true;
+        agf.style.opacity = "1";
+        appView.style.opacity = 0;
+        setTimeout(() => {
+            win.loadURL('file://' + __dirname + '../../../agrougrou/html/index.html');
+        }, 105);
     });
 }
 
 if(!lc) {
+    setTimeout(() => {
+        agf.style.opacity = "0";
+    }, 10);
+
     agt.addEventListener('mouseover', () => {
-        console.log("hover");
-        agf.style.opacity = "1";
+        if(!clicked) {
+            agf.style.opacity = "1";
+        }
     })
     
     agt.addEventListener('mouseout', () => {
-        agf.style.opacity = "0";
+        if(!clicked) {
+            agf.style.opacity = "0";
+        }
     });
 
     leCafoutchPage.addEventListener('click', () => {
         var win = remote.getCurrentWindow();
-        console.log(__dirname);
-        win.loadURL('file://' + __dirname + '../../../le-cafoutch/html/index.html');
+        clicked = true;
+        lcf.style.opacity = "1";
+        appView.style.opacity = 0;
+        setTimeout(() => {
+            win.loadURL('file://' + __dirname + '../../../le-cafoutch/html/index.html');
+        }, 105);
     });
 }
+

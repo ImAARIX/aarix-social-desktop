@@ -60,6 +60,7 @@ p {
     position: absolute;
     bottom: 0;
     right: 0;
+    transition: opacity .1s linear;
     /*padding:200px 0;*/
     text-align:center;
     color:#fff;

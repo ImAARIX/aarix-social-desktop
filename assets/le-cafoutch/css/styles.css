@@ -1,3 +1,21 @@
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 @keyframes zoom {
     from {transform:scale(0)}
     to {transform:scale(1)}
@@ -12,21 +30,25 @@
     z-index: 1;
 }
 
+html, body {
+  width: 100%;
+  height: 100%;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
 body {
     background-color: #36393F;
     margin: 0;
     color: white;
 }
 
-html, body {
-    width: 100%;
-    height: 100%;
-    user-select: none;
-    -webkit-user-select: none;
+#appView {
+  animation: fadeIn .1s linear;
 }
 
 .linear-bg-1 {
-    background: linear-gradient(rgb(41, 115, 115) 30%, rgb(140, 112, 81) 80%) 0% 0% / cover;
+    background: linear-gradient(to left, rgb(41, 115, 115), rgb(140, 112, 81));
 }
 
 /* Add styles here to customize the appearance of your app */
