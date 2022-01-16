@@ -6,7 +6,7 @@ const fs = require('fs');
 const path = require('path')
 const url = require('url');
 var tray = null;
-const icon = nativeImage.createFromPath(path.join(__dirname, './assets/img/icons/icon.png'));
+const icon = nativeImage.createFromPath(path.join(__dirname, './assets/img/icons/aarixsocial_logo.png'));
 const gotTheLock = app.requestSingleInstanceLock()
 
 

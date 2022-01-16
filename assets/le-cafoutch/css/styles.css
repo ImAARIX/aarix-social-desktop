@@ -31,10 +31,10 @@
 }
 
 html, body {
-  width: 100%;
-  height: 100%;
-  user-select: none;
-  -webkit-user-select: none;
+  	width: 100%;
+  	height: 100%;
+  	user-select: none;
+  	-webkit-user-select: none;
 }
 
 body {
@@ -44,7 +44,7 @@ body {
 }
 
 #appView {
-  animation: fadeIn .1s linear;
+  	animation: fadeIn .1s linear;
 }
 
 .linear-bg-1 {
@@ -95,35 +95,46 @@ body {
 }
 
 @media screen and (max-width: 600px) {
-  .animation-content #success p {
-    display: none;
-  }  
+  	.animation-content #success p {
+  	  	display: none;
+  	}  
 }
 
 @media screen and (max-width: 767px) {
-  .animation-content p {
-    font-size: 12px;
-  }  
+  	.animation-content p {
+  	  	font-size: 12px;
+  	}  
 }
 
 @media screen and (min-width: 768px) {
-  .animation-content p {
-    font-size: 15px;
-  }  
+  	.animation-content p {
+  	  	font-size: 15px;
+  	}  
 }
 
 .loadingrow {
-  height: 0;
-  transition: height .2s ease-in-out;
-  overflow: hidden;
+  	height: 0;
+  	transition: height .2s ease-in-out;
+  	overflow: hidden;
 }
 
 .closebutton {
-  position: absolute;
-  top: 25px;
-  right: 25px;
-  font-size: 25px;
-  cursor: pointer;
+  	position: absolute;
+  	top: 25px;
+  	right: 25px;
+  	font-size: 25px;
+  	cursor: pointer;
+}
+
+.dropzone {
+	width: 750px;
+	height: 500px;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	z-index: 999999;
+	background-color: rgba(0,0,0,0.5);
+	transition: visibility 175ms, opacity 175ms;
 }
 
 /*CSS ANIMATION QUE J'AI VOLÉ PTDR*/

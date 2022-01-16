@@ -124,7 +124,7 @@ function closeAnimation(time, givenNoUpload) {
         fileUpload.value = "";
 
         setTimeout(() => {
-            animation.style.display = "none";
+            animation.style.display = "";
             success.style.display = "none";
             errorDiv.style.display = "none";
             animation.classList.remove('animation-outanim');
@@ -187,3 +187,45 @@ function updateBar(progressEvent) {
     progressBar.value = percentCompleted;
     uploadPercent.innerText = "Upload en cours - " + percentCompleted + "%";
 }
+
+
+var lastTarget = null;
+
+window.addEventListener("dragenter", (event) => {
+    lastTarget = event.target;
+    if(animation.style.display == "") {
+        console.log(animation.style.display);
+        document.querySelector(".dropzone").style.visibility = "";
+        document.querySelector(".dropzone").style.opacity = 1;
+    }
+});
+
+window.addEventListener("dragleave", (event) => {
+    if(animation.style.display == "") {
+        if(event.target === lastTarget || event.target === document) {
+            document.querySelector(".dropzone").style.visibility = "hidden";
+            document.querySelector(".dropzone").style.opacity = 0;
+        }
+    }
+});
+
+window.addEventListener("dragover", (event) => {
+    event.preventDefault();
+});
+
+window.addEventListener("drop", (event) => {
+    event.preventDefault();
+    if(animation.style.display == "") {
+        document.querySelector(".dropzone").style.visibility = "hidden";
+        document.querySelector(".dropzone").style.opacity = 0;
+
+        var types = event.dataTransfer.types;
+        if(types.length > 2 || types.includes("text/plain") || types.includes("text/html")) {
+            alert('Vous ne pouvez pas déposer du texte sur Le Cafoutch !');
+        }else if(event.dataTransfer.files.length !== 1) {
+            alert("Il n'est pour l'instant possible d'envoyer qu'un seul fichier à la fois.");
+            return;
+        }
+        uploadFile(event.dataTransfer);
+    }
+})
