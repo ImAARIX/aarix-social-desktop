@@ -10,7 +10,6 @@ var noUrl = 0;
 
 async function agrougrouter(agvalue) {
     noUrl++;
-    console.log(agvalue);
     var formData = new FormData();
     // if(!agvalue == "") {
         formData.append("url", agvalue);
@@ -105,7 +104,6 @@ function copy() {
 }
 
 function changeLinkValue(val) {
-    console.log(val);
     linkValue = val;
 }
 

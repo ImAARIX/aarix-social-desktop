@@ -194,7 +194,6 @@ var lastTarget = null;
 window.addEventListener("dragenter", (event) => {
     lastTarget = event.target;
     if(animation.style.display == "") {
-        console.log(animation.style.display);
         document.querySelector(".dropzone").style.visibility = "";
         document.querySelector(".dropzone").style.opacity = 1;
     }

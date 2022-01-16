@@ -10,16 +10,13 @@ const icon = nativeImage.createFromPath(path.join(__dirname, './assets/img/icons
 const gotTheLock = app.requestSingleInstanceLock()
 
 
-
+if(!gotTheLock) {
+	app.quit();
+}
 
 
 // START OF UPDATE CODE
 async function searchForUpdate() {
-
-	if(!gotTheLock) {
-		app.quit();
-	}
-
 	try {
 		var versionFile = fs.readFileSync(path.join(__dirname, './assets/json/version.json'));
   		var versionParsed = JSON.parse(versionFile);
@@ -32,14 +29,10 @@ async function searchForUpdate() {
 		});
   		if(webVersionFile.data.version !== undefined) {
     		var webVersionParsed = webVersionFile.data;
-		  	console.log('appVersion: ' + versionParsed.version);
-		  	console.log('webVersion: ' + webVersionParsed.version);
 		  	if(versionParsed.version < webVersionParsed.version) {
-		  		console.log('Update found! V' + webVersionParsed.version);
 		  		showUpdateDialog(webVersionParsed.version);
 		  		return true;
 		  	} else {
-		  		console.log('Up to date');
 		  		return false;
 		  	}
   		}
@@ -69,7 +62,7 @@ function showUpdateDialog(webVersion) {
 		type: 'question',
 		buttons: ['Mettre à jour', 'Quitter'],
 		defaultId: 0,
-		title: 'Mise à jour disponible',
+		title: 'AARIX.social Desktop - Mise à jour disponible',
 		message: 'Mise à jour ' + webVersion + ' disponible.',
 		detail: "Veuillez la télécharger depuis le site web et l'installer.",
 	};
@@ -145,11 +138,24 @@ async function launchApp() {
 			app.on('activate', function () {
 				if (BrowserWindow.getAllWindows().length === 0) createWindow()
 			})
+
+			setInterval(() => checkServer(win), 60000);
+			setInterval(() => searchForUpdate(), 60000);
 	  })
 		  // app.on('window-all-closed', function () {
 		// 	if (process.platform !== 'darwin') app.quit()
 		  // })
 	}
+}
+
+async function checkServer(win) {
+    try {
+        var r = await axios.get('https://aarix.social', {
+            timeout: 1000
+        });
+    } catch(e) {
+        win.loadURL('file://' + __dirname + '/../../fallback/html/index.html');
+    }
 }
 //END OF APP CODE
 
