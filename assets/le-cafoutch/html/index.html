@@ -43,6 +43,7 @@
             <div id="success" style="display: none;">
                 <h1>Fichier uploadé !</h1>
                 <p id="link" style="color: rgb(108, 150, 228)"></p>
+                <p id="expdate">Expire le : </p>
                 <div class="row">
                     <div class="col-6">
                         <input id="copyButton" type="button" value="Copier" class="btn btn-secondary" style="border: none; border-radius: 7.5px; transition: background-color .2s ease-in-out; width: 147.08px; height: 36px;">
@@ -74,6 +75,14 @@
                             <div class="row">
                                 <div class="col d-flex justify-content-center" style="margin-bottom: 10px;">
                                     <input class="form-control" type="file" name="fileUpload" id="fileUpload" style="width: 50%;" required>
+                                </div>
+                            </div>
+                            <div class="expirationrow" id="expirationRow">
+                                <div class="row">
+                                    <div class="col d-flex justify-content-center" style="margin-bottom: 10px;">
+                                        <p style="margin-bottom: 0; margin-right: 50px;">Expiration : <label id="showedtime">1h</label></p>
+                                        <input type="range" id="expiration_time" name="expiration_time" min="1" max="5" step="1" value="1" oninput="showedtime.innerText = this.value + 'h';">
+                                    </div>
                                 </div>
                             </div>
                             <div id="loadingrow" class="loadingrow">

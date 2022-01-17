@@ -90,32 +90,37 @@ body {
 }
 
 .animation-content {
-    display:table-cell;
-    vertical-align:middle;
+  display:table-cell;
+  vertical-align:middle;
 }
 
 @media screen and (max-width: 600px) {
-  	.animation-content #success p {
-  	  	display: none;
-  	}  
+.animation-content #success #link {
+  display: none;
+}  
 }
 
 @media screen and (max-width: 767px) {
-  	.animation-content p {
-  	  	font-size: 12px;
-  	}  
+.animation-content #link, .animation-content p {
+  font-size: 12px;
+}  
 }
 
 @media screen and (min-width: 768px) {
-  	.animation-content p {
-  	  	font-size: 15px;
-  	}  
+.animation-content #link, .animation-content p {
+  font-size: 15px;
+}  
 }
 
 .loadingrow {
-  	height: 0;
-  	transition: height .2s ease-in-out;
-  	overflow: hidden;
+height: 0;
+transition: height .2s ease-in-out;
+overflow: hidden;
+}
+
+.expirationrow {
+transition: height .2s ease-in-out;
+overflow: hidden;
 }
 
 .closebutton {

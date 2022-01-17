@@ -50,6 +50,8 @@ function successs(successText) {
     success.style.display = "block";
     animation.style.display = "table";
 
+    url.value = "";
+
     textToCopy.innerText = successText;
 
     closeAnimation(10000, noUrl);
@@ -59,6 +61,8 @@ function errorr(errorInnerText) {
     animation.style.backgroundColor = "#ba3b46";
     errorDiv.style.display = "block";
     animation.style.display = "table";
+
+    url.value = "";
 
     var errorText = document.getElementById('errorText');
     errorText.innerText = errorInnerText;
@@ -71,8 +75,6 @@ function closeAnimation(time, givenNoUrl) {
         if(givenNoUrl !== undefined) if(noUrl !== givenNoUrl) return;
         animation.classList.remove('animation');
         animation.classList.add('animation-outanim');
-
-        url.value = "";
 
         setTimeout(() => {
             animation.style.display = "none";

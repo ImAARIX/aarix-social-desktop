@@ -68,12 +68,12 @@
                         <form>
                             <div class="row">
                                 <div class="col d-flex justify-content-center" style="margin-bottom: 10px;">
-                                    <input class="form-control" onchange="changeLinkValue(this.value); this.value = '';" name="url" id="url" placeholder="Mettez l'URL ici" type="text" style="width: 50%;">
+                                    <input class="form-control" oninput="changeLinkValue(this.value);" name="url" id="url" placeholder="Mettez l'URL ici" type="text" style="width: 50%;">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col d-flex justify-content-center" style="margin-top: 10px;">
-                                    <input id="agrougrouterButton" onclick="agrougrouter(url.value); url.value = '';" style="width: 50%; background: rgb(30,135,0); font-weight: bold; border-radius: 7.5px;" type="button" value="Rétrécir mon lien" class="btn btn-secondary" style="border: none; border-radius: 7.5px; width: 147.09px; height: 36px;">
+                                    <input id="agrougrouterButton" onclick="agrougrouter(url.value);" style="width: 50%; background: rgb(30,135,0); font-weight: bold; border-radius: 7.5px;" type="button" value="Rétrécir mon lien" class="btn btn-secondary" style="border: none; border-radius: 7.5px; width: 147.09px; height: 36px;">
                                 </div>
                             </div>
                         </form>

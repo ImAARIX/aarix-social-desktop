@@ -9,8 +9,16 @@ var errorDiv = document.getElementById('error');
 var uploadPercent = document.getElementById('uploadPercent');
 var progressBar = document.getElementById('progressBar');
 var closeAnimationButton = document.getElementById('closeAnimationButton');
+var expirationRow = document.getElementById('expirationRow');
+var expirationTime = document.getElementById('expiration_time');
+var showedTime = document.getElementById('showedtime');
+var expdate = document.getElementById('expdate');
 
 var noUpload = 0;
+
+if(expirationTime.value == 0) {
+    showedTime.innerText = "aucune"
+}
 
 fileUpload.onchange = () => {
     uploadFile(fileUpload);
@@ -36,6 +44,7 @@ closeAnimationButton.onclick = () => {
 async function uploadFile(inp) {
     noUpload++;
 
+    expirationRow.style.height = "0";
     var loadingrow = document.getElementById('loadingrow');
     var formData = new FormData();
     var file = inp.files[0];
@@ -45,6 +54,7 @@ async function uploadFile(inp) {
     loadingrow.style.height = "120px";
 
     formData.append("file", file);
+    formData.append("expiration_time", (expirationTime.value * 3600));
 
     try {
         var uploadAnswer = await axios.post('https://api.aarix.social/v1/le-cafoutch/upload/', formData, {
@@ -77,9 +87,21 @@ async function uploadFile(inp) {
                 case "5":
                     errorr("Erreur interne du serveur.");
                     break;
+                case "6":
+                    errorr("Aucun fichier n'a été envoyé !");
+                    break;
+                case "7":
+                    errorr("Vous n'avez pas le droit d'utiliser cette expiration.");
+                    break;
             }
         } else {
-            successs(uploadData.url);
+            if(uploadData.expirationtimestamp !== 0) {
+                var offset = 1;
+                var expt = new Date((uploadData.expirationtimestamp * 1000) + offset * 3600 * 1000).toUTCString().replace( / GMT$/, "" ).replace("Mon", "Lundi").replace("Tue", "Mardi").replace("Wed", "Mercredi").replace("Thu", "Jeudi").replace("Fri", "Vendredi").replace("Sat", "Samedi").replace("Sun", "Dimanche").replace("Jan", "janvier").replace("Feb", "février").replace("Mar", "mars").replace("Apr", "avril").replace("May", "mai").replace("Jun", "juin").replace("Jul", "juillet").replace("Aug", "août").replace("Sep", "septembre").replace("Oct", "octobre").replace("Nov", "novembre").replace("Dec", "décembre").replace(",", "");
+                successs(uploadData.url, expt);
+            } else {
+                successs(uploadData.url, "jamais");
+            }
         }
     } catch(e) {
         console.log('Huston we have problem...:', e);
@@ -88,12 +110,14 @@ async function uploadFile(inp) {
     
 }
 
-function successs(successText) {
+function successs(successText, expt) {
     animation.style.backgroundColor = "#49416d";
     success.style.display = "block";
     animation.style.display = "table";
 
     textToCopy.innerText = successText;
+    expdate.innerText = "Expire le : " + expt;
+    expirationRow.style.height = "";
 
     loadingrow.style.height = "0";
     uploadPercent.innerText = "Upload en cours - 0%";
@@ -108,6 +132,7 @@ function errorr(errorInnerText) {
     animation.style.display = "table";
 
     loadingrow.style.height = "0";
+    expirationRow.style.height = "";
 
     var errorText = document.getElementById('errorText');
     errorText.innerText = errorInnerText;
