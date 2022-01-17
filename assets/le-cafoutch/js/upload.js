@@ -16,6 +16,8 @@ var expdate = document.getElementById('expdate');
 
 var noUpload = 0;
 
+changeSlider();
+
 if(expirationTime.value == 0) {
     showedTime.innerText = "aucune"
 }
@@ -39,6 +41,21 @@ copyButton.onclick = () => {
 
 closeAnimationButton.onclick = () => {
     closeAnimation();
+}
+
+async function changeSlider() {
+    var webSliderFile = await axios.get('https://aarix.social/desktop/slider.json', {
+    	validateStatus: function (status) {
+    		return true;
+        },
+        timeout: 5000
+    });
+    if(webSliderFile.status == "200") {
+        expirationTime.setAttribute('min', webSliderFile.data.base_user_slider_min);
+        expirationTime.setAttribute('max', webSliderFile.data.base_user_slider_max);
+    } else {
+
+    }
 }
 
 async function uploadFile(inp) {
