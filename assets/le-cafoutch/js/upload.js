@@ -114,7 +114,7 @@ async function uploadFile(inp) {
         } else {
             if(uploadData.expirationtimestamp !== 0) {
                 var offset = 1;
-                var expt = new Date((uploadData.expirationtimestamp * 1000) + offset * 3600 * 1000).toUTCString().replace( / GMT$/, "" ).replace("Mon", "Lundi").replace("Tue", "Mardi").replace("Wed", "Mercredi").replace("Thu", "Jeudi").replace("Fri", "Vendredi").replace("Sat", "Samedi").replace("Sun", "Dimanche").replace("Jan", "janvier").replace("Feb", "février").replace("Mar", "mars").replace("Apr", "avril").replace("May", "mai").replace("Jun", "juin").replace("Jul", "juillet").replace("Aug", "août").replace("Sep", "septembre").replace("Oct", "octobre").replace("Nov", "novembre").replace("Dec", "décembre").replace(",", "");
+                var expt = new Date((uploadData.expirationtimestamp * 1000) + offset * 3600 * 1000).toUTCString().replace( / GMT$/, "" ).replace("Jan", "janvier").replace("Feb", "février").replace("Mar", "mars").replace("Apr", "avril").replace("May", "mai").replace("Jun", "juin").replace("Jul", "juillet").replace("Aug", "août").replace("Sep", "septembre").replace("Oct", "octobre").replace("Nov", "novembre").replace("Dec", "décembre").replace("Mon", "Lundi").replace("Tue", "Mardi").replace("Wed", "Mercredi").replace("Thu", "Jeudi").replace("Fri", "Vendredi").replace("Sat", "Samedi").replace("Sun", "Dimanche").replace(",", "");
                 successs(uploadData.url, expt);
             } else {
                 successs(uploadData.url, "jamais");
