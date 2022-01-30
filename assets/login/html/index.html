@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'"> -->
+    <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/navbar.css" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
+    <title>Bienvenue - AARIX.social Desktop</title>
+</head>
+
+<body>
+    <div class="loginform">
+        <div class="row">
+            <div class="col">
+                <div style="margin: auto; width: 100px;">
+                    <img id="app_logo" src="../../img/icons/aarixsocial_logo.png">
+                </div>
+            </div>
+        </div>
+        <div id="buttons">
+            <div class="row" style="margin-top: 25px;">
+                <div class="col">
+                    <button type="button" class="btn btn-dark" onclick="login();">
+                        Connexion
+                    </button>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 10px;">
+                <div class="col">
+                    <button type="button" class="btn btn-dark" onclick="">
+                        Continuer sans compte
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/loginform.js"></script>
+    <script src="../../node_js/renderer.js"></script>
+</body>
+</html>
