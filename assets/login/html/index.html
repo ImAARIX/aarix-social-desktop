@@ -12,26 +12,28 @@
 
 <body>
     <div class="loginform">
-        <div class="row">
-            <div class="col">
-                <div style="margin: auto; width: 100px;">
-                    <img id="app_logo" src="../../img/icons/aarixsocial_logo.png">
+        <div id="loginFormView" style="display: none;">
+            <div class="row">
+                <div class="col">
+                    <div style="margin: auto; width: 100px;">
+                        <img id="app_logo" src="../../img/icons/aarixsocial_logo.png">
+                    </div>
                 </div>
             </div>
-        </div>
-        <div id="buttons">
-            <div class="row" style="margin-top: 25px;">
-                <div class="col">
-                    <button type="button" class="btn btn-dark" onclick="login();">
-                        Connexion
-                    </button>
+            <div id="buttons">
+                <div class="row" style="margin-top: 25px;">
+                    <div class="col">
+                        <button type="button" class="btn btn-dark" onclick="login();">
+                            Connexion
+                        </button>
+                    </div>
                 </div>
-            </div>
-            <div class="row" style="margin-top: 10px;">
-                <div class="col">
-                    <button type="button" class="btn btn-dark" onclick="">
-                        Continuer sans compte
-                    </button>
+                <div class="row" style="margin-top: 10px;">
+                    <div class="col">
+                        <button type="button" class="btn btn-dark" onclick="withoutLogin();">
+                            Continuer sans compte
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

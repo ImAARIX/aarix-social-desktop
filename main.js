@@ -94,17 +94,7 @@ async function searchForUpdate() {
 	} catch(e) {
 		var err = e.toJSON();
 		if(!(err.code == 'ETIMEDOUT') && !(err.code == 'ECONNABORTED')) {
-			const options = {
-				type: 'question',
-				buttons: ['Ok'],
-				defaultId: 0,
-				title: "Vous n'êtes pas connecté à internet.",
-				message: "Vous n'êtes pas connecté à internet.",
-				detail: "Vous ne pouvez donc pas lancer l'application."
-			}
-			dialog.showMessageBox(null, options).then(() => {
-				app.quit();
-			});
+			firstStart();
 			return true;
 		} else {
 			return false;
@@ -138,7 +128,7 @@ function showUpdateDialog(webVersion) {
 
 //START OF APP CODE
 async function firstStart() {
-	if(!fs.existsSync(appdataDir) || !fs.existsSync(appdataUserInfosDir)) {
+	if(!fs.existsSync(appdataDir) || !fs.existsSync(appdataUserInfosDir) || !fs.existsSync(appdataUserInfosDir + '/userscope.json')) {
 		return true;
 	} else {
 		return false;
@@ -157,6 +147,8 @@ function loginWithScope(scope) {
 		};
 		dataToWrite = JSON.stringify(dataToWrite);
 		fs.writeFileSync(appdataUserInfosDir + '/userscope.json', dataToWrite);
+		app.relaunch();
+		app.exit(0);
 	}
 }
 
@@ -258,32 +250,13 @@ async function launchApp() {
 	} else if(await searchForUpdate()) {
 		return;
 	} else if(await firstStart()) {
-		// fs.mkdirSync(appdataDir, { recursive: true });
-		// fs.mkdirSync(appdataUserInfosDir, { recursive: true });
+		fs.mkdirSync(appdataDir, { recursive: true });
+		fs.mkdirSync(appdataUserInfosDir, { recursive: true });
 
 		app.whenReady().then(() => {
 			loginWin = createLoginWindow();
 			loginWin.once('ready-to-show', () => {
 				loginWin.show();
-
-				tray = new Tray(icon);
-				const contextMenu = Menu.buildFromTemplate([
-					{label: 'Quitter', role: 'quit'}
-				]);
-          		tray.setToolTip('AARIX.social Desktop');
-				tray.setContextMenu(contextMenu);
-				tray.displayBalloon({
-					title: 'AARIX.social Desktop',
-					content: 'AARIX.social Desktop tourne actuellement en arrière plan.'
-				});
-	  
-				tray.on('click', () => {
-					if(loginWin.isVisible()) {
-						loginWin.hide();
-					} else {
-						loginWin.show();
-					}
-				})
 			});
 		});
 	}
